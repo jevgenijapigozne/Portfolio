@@ -1,0 +1,15 @@
+Kaggle's New York Stock Exchange S&P 500 dataset
+
+Introduction:
+
+In this project I analysed real life data from the New York Stock Exchange. I was drawing a subset of a large dataset provided by Kaggle that contains historical financial data from S&P 500 companies. I was using a smaller subset of the data for the project.
+
+Data:
+
+I used the Fundamentals.csv and Securities.csv files provided by Kaggle. The Fundamentals file provides the fundamental financial data gathered from SEC 10K annual filings from 448 companies listed on the S&P 500 index. The Securities file provided the industry or sector information the companies are categorized under on the S&P 500 index.
+
+Project Objectives:
+
+1.	Identify the question about the data that you will answer based on your data analysis and include this in your slide presentation. Complete your own data analysis and create a presentation to share your findings.
+2.	Develop a dashboard for a Profit and Loss Statement.
+3.	Create a Financial Forecasting Model using three scenarios: Best case, Weak case, and Base case
