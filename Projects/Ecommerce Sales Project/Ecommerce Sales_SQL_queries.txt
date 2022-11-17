@@ -1,0 +1,213 @@
+How many Customers do we have in the data?
+	795
+
+SELECT COUNT(DISTINCT customer_id)
+FROM customers;
+What was the city with the most profit for the company in 2015 and how much was it?
+New York City	14753
+	SELECT o.shipping_city, SUM(od.order_profits)
+FROM orders AS o
+JOIN order_details od
+ON o.order_id=od.order_id
+WHERE order_date LIKE '%2015'
+GROUP BY o.shipping_city
+ORDER BY 2 DESC
+LIMIT 1;
+
+How many different cities do we have in the data?
+531
+
+SELECT COUNT(*)
+FROM
+	(SELECT shipping_city
+	FROM orders
+	GROUP BY shipping_city)
+
+Show the total spent by customers from low to high.
+	SELECT customer_name,customer_id, SUM(order_sales)
+
+FROM customers
+
+INNER JOIN orders
+
+USING(customer_id)
+
+INNER JOIN order_details 
+
+USING (order_id)
+
+GROUP BY 1,2
+
+ORDER BY 3
+
+What is the most profitable City in the State of Tennessee?
+Lebanon	83
+
+SELECT o.shipping_city, SUM(od.order_profits)
+FROM orders AS o
+INNER JOIN order_details as od
+USING (order_id)
+GROUP BY 1
+HAVING o.shipping_state= 'Tennessee'
+ORDER BY 2 DESC
+LIMIT 1
+
+What’s the average annual profit for that city across all years in that city?
+2016	6.0
+2017	18.0
+2018	59.0
+
+
+SELECT SUBSTR(o.order_date,-4,4) as year, AVG(od.order_profits)
+FROM orders AS o
+INNER JOIN order_details as od
+USING (order_id)
+WHERE o.shipping_state= 'Tennessee' AND o.shipping_city='Lebanon'
+GROUP BY 1
+
+What is the distribution of customer types in the data?
+Consumer	410
+Corporate	237
+Home Office	148
+
+SELECT customer_segment, COUNT(customer_segment)
+FROM customers
+GROUP BY 1
+
+What’s the most profitable product category on average in Iowa across all years?
+Furniture	130.25
+
+SELECT p.product_category, AVG(od.order_profits)
+FROM product AS p
+JOIN order_details AS od
+USING (product_id)
+JOIN orders AS o
+USING (order_id)
+WHERE o.shipping_state='Iowa'
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 1
+
+What is the most popular product in that category across all states in 2016?
+Global Push Button Manager's Chair, Indigo	22
+
+SELECT p.product_name,SUM(od.quantity)
+FROM product AS p
+JOIN order_details AS od
+USING (product_id)
+JOIN orders AS o
+USING (order_id)
+WHERE p.product_category='Furniture' AND SUBSTR(o.order_date,-4,4)='2016'
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 1
+
+Which customer got the most discount in the data? (in total amount)
+Sean Miller	11988.9
+
+SELECT c.customer_name, SUM(od.order_sales*od.order_discount) as total_discount_amount
+FROM order_details AS od
+JOIN orders AS o
+USING (order_id)
+JOIN customers AS c
+USING (customer_id)
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 1
+
+How widely did monthly profits vary in 2018?
+3	14758
+9	10987
+10	9272
+11	9217
+8	9034
+12	8473
+6	8226
+1	7137
+7	6951
+5	6342
+2	1612
+4	934
+Profit range 13824
+
+WITH total_profit_per_month
+AS
+	(
+	SELECT SUBSTR(o.order_date,1,INSTR(o.order_date,'/')-1) as month, SUM(od.order_profits) as total_profit
+	FROM order_details AS od
+	JOIN orders AS o
+	USING (order_id)
+	WHERE SUBSTR(o.order_date,-4,4)='2018'
+	GROUP BY 1
+	ORDER BY 2 DESC
+)
+SELECT MAX( total_profit)-MIN(total_profit) as profit_range
+FROM total_profit_per_month
+
+WITH diff AS
+	(
+
+	WITH total_profit_per_month
+	AS
+		(
+		SELECT CAST((SUBSTR(o.order_date,1,INSTR(o.order_date,'/')-1)) AS INTEGER)as month, SUM(od.order_profits) as total_profit
+		FROM order_details AS od
+		JOIN orders AS o
+		USING (order_id)
+		WHERE SUBSTR(o.order_date,-4,4)='2018'
+		GROUP BY 1
+		
+	)
+	SELECT month, total_profit,
+	LAG (total_profit,1,0) OVER (ORDER BY month) previous_profit
+	FROM total_profit_per_month
+	)
+SELECT total_profit-previous_profit AS difference
+FROM diff
+ORDER BY ABS(total_profit-previous_profit)DESC 	
+
+Which order was the highest in 2015?
+CA-2015-145317	23660
+
+SELECT o.order_id, SUM(od.order_sales)
+FROM orders as o
+JOIN order_details as od
+USING(order_id)
+WHERE SUBSTR(o.order_date,-4,4)='2015'
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 1
+
+What was the rank of each city in the East region in 2015
+		
+SELECT o.shipping_city, SUM(od.quantity) as order_quantity,
+	RANK() OVER
+	(ORDER BY SUM(od.quantity)DESC)[rank]
+FROM orders AS o
+JOIN order_details AS od
+USING(order_id)
+WHERE shipping_region='East' AND SUBSTR(o.order_date,-4,4)='2015'
+GROUP BY 1 	
+
+Join all DB tables into one dataset that includes all unique columns and download it as a csv file
+
+CREATE TABLE "coodp" ( "customer_id" INTEGER, "customer_name" TEXT, "customer_segment" TEXT,
+"order_details_id" INTEGER, "order_id" TEXT, "product_id" INTEGER, "quantity" INTEGER, "order_discount" INTEGER, "order_profits" INTEGER, "order_profit_ratio" REAL, "order_sales" INTEGER,
+ "order_date" TEXT, "shipping_city" TEXT, "shipping_state" TEXT, "shipping_region" TEXT, "shipping_country" TEXT, "shipping_postal_code" INTEGER, "shipping_date" TEXT, "shipping_mode" TEXT, 
+ "product_name" TEXT, "product_category" TEXT, "product_subcategory" TEXT, "product_manufacturer" TEXT,
+PRIMARY KEY("order_id","customer_id","product_id"))
+
+INSERT INTO "coodp" 
+SELECT customer_id,customer_name,customer_segment,
+order_details_id, order_id, product_id, quantity, order_discount,
+order_profits, order_profit_ratio, order_sales,
+order_date, shipping_city, shipping_state, shipping_region, shipping_country, shipping_postal_code,shipping_date,shipping_mode, 
+product_name, product_category, product_subcategory, product_manufacturer
+FROM customers 
+JOIN orders
+USING (customer_id)
+JOIN order_details
+USING (order_id)
+JOIN product
+USING (product_id)
+
