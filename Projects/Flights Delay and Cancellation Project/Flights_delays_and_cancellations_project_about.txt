@@ -1,0 +1,23 @@
+Application used:
+
+Tableau
+
+Project Description:
+
+Create visualizations to reveal insights from a data set and tell a story or highlight patterns in the data set. It should be a reflection of the theory and practice of data visualization, such as visual encodings, design principles, and effective communication.
+
+Data set:
+
+Flight Delays and Cancellations
+This data comes from a Kaggle dataset, it tracks the on-time performance of US domestic flights operated by large air carriers in 2015.
+The file to use in creating data visualizations is the flights.csv file. The other two provided files may be used in conjunction with the flights.csv file.
+
+Project objectives:
+
+Create three visualizations. Some questions it may attempt to answer include those pertaining to the following areas:
+1.	Which airlines or airports have the worst delays?
+2.	Determine which destinations and arrival destinations have the most delays? 
+3.	What causes delays?
+4.	What part of the flight causes the most delays? Do these causes vary by airport or time of year?
+Come up with a question about the data and answer it. 
+Build a dashboard or story to answer your question and lead viewers to that answer

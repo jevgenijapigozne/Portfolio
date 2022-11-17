@@ -1,0 +1,100 @@
+
+Link to the Tableau Story
+
+https://public.tableau.com/app/profile/jevgenija.pigozne/viz/FlightdelayAnalysis_16656636937750/Flightdelaystory
+
+Summary
+
+ Analysis examined flight delays to find out reasons and factors of the occurrences.
+‘Overview’ dashboard – brief statistics of the data
+‘Airlines and airports delays statistics’ draw a comparison between categories (airports/airlines) and variable number of flight delays 
+‘Reasons of airlines and airports delays’  find the difference between categories (airports /airlines) and distribution of the delay reasons
+‘Delay reasons time aggregation’ inspects  all data points for flight delays over a period of time (the granularity).
+
+Design
+
+Horizontal charts and tabular data show a distribution of data points or perform a comparison of metric values across different subgroups of the data (airlines/airports). Line chart emphasise the overall pattern of the data, track changes over specified periods of time, compare changes over the same period of time for more than one group like delay reasons.
+
+Resources
+ 
+https://www.oag.com/airline-on-time-performance-defining-late
+https://en.wikipedia.org/wiki/List_of_the_busiest_airports_in_the_United_States
+https://thenode.biologists.com/data-visualization-with-flying-colors/research/?gclid=Cj0KCQjwy5maBhDdARIsAMxrkw3ZM-WRQ3e6TS1ffZrjLT33MAuqG0DIPnIBYupKODxcZcC13KOA5mkaAopmEALw_wcB
+
+Link to ‘Overview’ dashboard
+
+https://public.tableau.com/app/profile/jevgenija.pigozne/viz/Overview_16656688350370/Overview
+
+Summary
+
+‘Overview’ dashboard – brief statistics of the data
+
+Design
+
+Tableau cards and pie charts used to briefly familiarize with data in a simple way
+
+Resources
+
+https://thenode.biologists.com/data-visualization-with-flying-colors/research/?gclid=Cj0KCQjwy5maBhDdARIsAMxrkw3ZM-WRQ3e6TS1ffZrjLT33MAuqG0DIPnIBYupKODxcZcC13KOA5mkaAopmEALw_wcB
+
+Link to ‘Airlines and airports delays statistics’
+
+https://public.tableau.com/app/profile/jevgenija.pigozne/viz/Airlinesandairportsdelaysstatistics/Airlinesandairportsdelaysstatistics
+
+Summary
+
+‘Airlines and airports delays statistics’ draw a comparison between categories (airports/airlines) and variable number of flight delays 
+Number of flight delays were compared as absolute values and as percentage of total flights per category. The approach diminish  downfalls of both methods like great percentage contribution at small numbers and great absolute values at small percentages.
+
+Design
+ Horizontal charts perform a comparison of flight delays between selected metric : origin airports, destination airports or airlines. Slider is provided to range the metric by flight number to analyse the metric of interest.
+On-time performance (OTP) indicator selection bar defines the delay in minutes.
+
+Findings
+
+Chicago O’Hare International Airport as origin  and destination airport performed poorly in terms of  absolute value  and percentage from number of flights.
+One of the worst performing airline was Southwest Airlines Co. There is no right or wrong answer to define the worst performers as answer depend on the point of view and  interest of the stakeholders.  
+ 
+Resources
+
+ https://www.oag.com/airline-on-time-performance-defining-late
+ https://en.wikipedia.org/wiki/List_of_the_busiest_airports_in_the_United_States
+
+Link to ‘Reasons of airlines and airports delays’ https://public.tableau.com/app/profile/jevgenija.pigozne/viz/Reasonsofairlinesandairportsdelays/Reasonsofairlinesandairportsdelays
+
+Summary
+
+ ‘Reasons of airlines and airports delays’  inspected the difference between categories (airports /airlines) in terms of the delay reasons, presenting delay reasons distribution of all flight as well
+
+Design
+
+ Horizontal charts and tabular data show a distribution of the delay reasons for all flights and flights per selected metric: origin airports, destination airports or airlines.
+
+Findings: 
+
+One third for each of all flight delays distributed between air system, airline and late aircraft delay reasons. Security part is 0.2% and weather 4%.
+Southwest Airlines Co performed the worst adding 16%-30% to totals of all delay reason categories.
+Chicago O’Hare International Airport and Hartsfield-Jackson Atlanta International Airport have worst results.
+
+Resources
+
+ https://thenode.biologists.com/data-visualization-with-flying-colors/research/?gclid=Cj0KCQjwy5maBhDdARIsAMxrkw3ZM-WRQ3e6TS1ffZrjLT33MAuqG0DIPnIBYupKODxcZcC13KOA5mkaAopmEALw_wcB
+
+Link to ‘Delay reasons time aggregation’ https://public.tableau.com/app/profile/jevgenija.pigozne/viz/Delayreasonstimeaggregation/Delayreasonstimeaggregation
+
+Summary
+
+‘Delay reasons time aggregation’ tracks and compare changes in number of delays over given period of time.  Delays were time aggregated per month, per weekday, per hour and compared with number of flight to find correlations and trends. 
+
+Design
+
+Line chart for every delay reason category on top of bar chart of number of flights show the changes over the time.
+
+Finding
+
+Air system, airline and late aircraft delay reasons follow almost the same trend in all time aggregations, raising question of data reliability. All these metrics  have positive correlation with number of flights. Notably weather delay reason have the same trend as above.
+Resources
+n/a
+
+
+
